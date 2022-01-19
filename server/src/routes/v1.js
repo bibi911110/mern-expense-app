@@ -8,13 +8,13 @@ const expenseController = require('../controllers/expense.controller');
 
 // Multer Configurations
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, './public');
-  },
-  filename: (req, file, cb) => {
-    const fileName = `${Date.now()}_${file.originalname.replace(/\s+/g, '-')}`;
-    cb(null, fileName);
-  },
+    destination: (req, file, cb) => {
+        cb(null, './public');
+    },
+    filename: (req, file, cb) => {
+        const fileName = `${Date.now()}_${file.originalname.replace(/\s+/g, '-')}`;
+        cb(null, fileName);
+    },
 });
 const upload = multer({ storage }).single('receipt');
 
@@ -24,17 +24,17 @@ router.post('/auth', userController.login);
 
 // Customize auth message Protect the  routes
 router.all('*', (req, res, next) => {
-  passport.authenticate('jwt', { session: false }, (err, user) => {
-    if (err || !user) {
-      const error = new Error('You are not authorized to access this area');
-      error.status = 401;
-      throw error;
-    }
+    passport.authenticate('jwt', { session: false }, (err, user) => {
+        if (err || !user) {
+            const error = new Error('You are not authorized to access this area');
+            error.status = 401;
+            throw error;
+        }
 
-    //
-    req.user = user;
-    return next();
-  })(req, res, next);
+        //
+        req.user = user;
+        return next();
+    })(req, res, next);
 });
 
 // -------------- Protected Routes -------------- //

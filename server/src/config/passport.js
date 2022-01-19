@@ -8,17 +8,18 @@ module.exports = (passport) => {
     config.secretOrKey = process.env.JWT_SECRET;
     config.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 
-    passport.use(new JwtStrategy(config, async (jwtPayload, done) => {
-        try {
-        
-            const user = await User.findById(jwtPayload._id);
-            if (user) {
-                return done(null, user);
-            }else {
-                return done(null, false);
+    passport.use(
+        new JwtStrategy(config, async (jwtPayload, done) => {
+            try {
+                const user = await User.findById(jwtPayload._id);
+                if (user) {
+                    return done(null, user);
+                } else {
+                    return done(null, false);
+                }
+            } catch (e) {
+                return done(err, false);
             }
-        }catch(e){
-            return done(err, false);
-        }
-    }));
+        })
+    );
 };

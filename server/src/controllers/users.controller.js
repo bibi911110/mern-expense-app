@@ -1,31 +1,29 @@
 const jwt = require('jsonwebtoken');
-const User = require("../models/user.model");
+const User = require('../models/user.model');
 
 const userController = {};
 
 userController.regisetr = async (req, res, next) => {
-  const { name, email, password, joined } = req.body;
-  const newUser = new User({
-    name,
-    email,
-    password,
-    joined
-  });
+    const { name, email, password, joined } = req.body;
+    const newUser = new User({
+        name,
+        email,
+        password,
+        joined,
+    });
 
-  try {
-      const user = await newUser.save();
-      return res.send({ user });
-  }catch(e) {
-      if (e.code === 11000 && e.name === 'MongoError') {
-          const error = new Error(`Email address ${newUser.email} is already taken`);
-          error.status = 400
-          next(error);
-      }else {
-          next(e);
-      }
-      
-  }
-
+    try {
+        const user = await newUser.save();
+        return res.send({ user });
+    } catch (e) {
+        if (e.code === 11000 && e.name === 'MongoError') {
+            const error = new Error(`Email address ${newUser.email} is already taken`);
+            error.status = 400;
+            next(error);
+        } else {
+            next(e);
+        }
+    }
 };
 
 userController.login = async (req, res, next) => {
@@ -42,7 +40,8 @@ userController.login = async (req, res, next) => {
 
         //Check the password
         user.isPasswordMatch(password, user.password, (err, matched) => {
-            if (matched) { //Generate JWT
+            if (matched) {
+                //Generate JWT
                 const secret = process.env.JWT_SECRET;
                 const expire = process.env.JWT_EXPIRATION;
 
@@ -51,18 +50,16 @@ userController.login = async (req, res, next) => {
             }
 
             res.status(401).send({
-                error: 'Invalid username/password combination'
+                error: 'Invalid username/password combination',
             });
         });
-
-    }catch(e){
+    } catch (e) {
         next(e);
     }
-    
 };
 
 userController.me = (req, res, next) => {
     const { user } = req;
-    res.send({ user })
-}
+    res.send({ user });
+};
 module.exports = userController;

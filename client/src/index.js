@@ -13,12 +13,12 @@ import { onLodingSignIn } from './actions/auth_actions';
 store.dispatch(onLodingSignIn());
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </BrowserRouter>,
-  document.getElementById('root')
+    <BrowserRouter>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </BrowserRouter>,
+    document.getElementById('root')
 );
 
 serviceWorker.unregister();

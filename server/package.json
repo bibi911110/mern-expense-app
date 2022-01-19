@@ -1,37 +1,37 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "MERN Stack Expense App Tutorial",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec node index.js",
-    "start": "node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/abolkog/mern-expense-app.git"
-  },
-  "author": "Khalid Elshafie",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/abolkog/mern-expense-app/issues"
-  },
-  "homepage": "https://github.com/abolkog/mern-expense-app#readme",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "dotenv": "^6.2.0",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.14",
-    "morgan": "^1.10.0",
-    "multer": "^1.4.2",
-    "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0"
-  },
-  "devDependencies": {
-    "nodemon": "^1.19.4"
-  }
+    "name": "server",
+    "version": "1.0.0",
+    "description": "MERN Stack Expense App Tutorial",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "nodemon --exec node index.js",
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/abolkog/mern-expense-app.git"
+    },
+    "author": "Khalid Elshafie",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/abolkog/mern-expense-app/issues"
+    },
+    "homepage": "https://github.com/abolkog/mern-expense-app#readme",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "dotenv": "^6.2.0",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.9.14",
+        "morgan": "^1.10.0",
+        "multer": "^1.4.2",
+        "passport": "^0.4.1",
+        "passport-jwt": "^4.0.0"
+    },
+    "devDependencies": {
+        "nodemon": "^1.19.4"
+    }
 }

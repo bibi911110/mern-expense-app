@@ -12,15 +12,15 @@ const app = express();
 
 // ----------- DB Config -----------//
 mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
+    useNewUrlParser: true,
+    useCreateIndex: true,
 });
 
 mongoose.connection.on('connected', () => {
-  console.log('Connected to the database');
+    console.log('Connected to the database');
 });
 mongoose.connection.on('error', (err) => {
-  console.error(`Failed to connected to the database: ${err}`);
+    console.error(`Failed to connected to the database: ${err}`);
 });
 
 // ----------- Middlewares -----------//
@@ -42,30 +42,28 @@ app.use(express.static('public'));
 
 // ----------- Static Files -----------//
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../../client/build')));
-  app.get('*', (req, res) => {
-    res.sendFile(
-      path.resolve(__dirname, '../../client', 'build', 'index.html')
-    );
-  });
+    app.use(express.static(path.join(__dirname, '../../client/build')));
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '../../client', 'build', 'index.html'));
+    });
 }
 
 // ----------- ERRORS -----------//
 
 app.use((req, res, next) => {
-  //404 Not Found
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    //404 Not Found
+    const err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 app.use((err, req, res, next) => {
-  const status = err.status || 500;
-  const error = err.message || 'Error processing your request';
+    const status = err.status || 500;
+    const error = err.message || 'Error processing your request';
 
-  res.status(status).send({
-    error,
-  });
+    res.status(status).send({
+        error,
+    });
 });
 
 module.exports = app;
